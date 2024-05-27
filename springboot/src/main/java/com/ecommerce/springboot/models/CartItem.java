@@ -27,6 +27,6 @@ public class CartItem {
     @JsonIgnoreProperties(value={"productId","seller","quantity"})
     private Product cartProduct;
     
-    private Integer cartItem;
+    private Integer cartItemQuantity;
 
 }
