@@ -18,9 +18,6 @@ import com.ecommerce.springboot.models.SellerDto;
 import com.ecommerce.springboot.models.SessionDto;
 import com.ecommerce.springboot.models.UserSession;
 import com.ecommerce.springboot.repository.SessionRespository;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-
 import com.ecommerce.springboot.repository.SellerRepository;
 import com.ecommerce.springboot.repository.CustomerRepository;
 

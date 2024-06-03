@@ -14,14 +14,10 @@ import com.ecommerce.springboot.models.Cart;
 import com.ecommerce.springboot.models.CartDto;
 import com.ecommerce.springboot.models.CartItem;
 import com.ecommerce.springboot.models.Customer;
-import com.ecommerce.springboot.models.Product;
 import com.ecommerce.springboot.models.UserSession;
-import com.ecommerce.springboot.repository.CartItemRepository;
 import com.ecommerce.springboot.repository.CartRepository;
 import com.ecommerce.springboot.repository.CustomerRepository;
 import com.ecommerce.springboot.repository.SessionRespository;
-import com.ecommerce.springboot.repository.ProductRepository;
-import com.ecommerce.springboot.service.LoginLogoutService;
 
 @Component
 public class CartService {
@@ -36,9 +32,6 @@ public class CartService {
     private CustomerRepository customerRepository;
     @Autowired
     private LoginLogoutService loginService;
-    @Autowired 
-    private ProductRepository productRepository;
-
 
     public Cart addProduct(CartDto cartDto, String token){
         if(token.contains("customer")==false){
