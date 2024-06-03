@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ecommerce.springboot.exception.LoginException;
 import com.ecommerce.springboot.exception.OrderException;
@@ -18,6 +19,7 @@ import com.ecommerce.springboot.models.OrderStatusValues;
 import com.ecommerce.springboot.models.ProductStatus;
 import com.ecommerce.springboot.repository.OrderRepository;
 
+@Component
 public class OrderService {
 
     @Autowired
@@ -105,7 +107,6 @@ public class OrderService {
             if (order.getOrderStatus() == OrderStatusValues.PENDING) {
                 order.setOrderStatus(OrderStatusValues.CANCELLED);
                 orderRepository.save(order);
-                return order;
             } else if (order.getOrderStatus() == OrderStatusValues.SUCCESS) {
                 order.setOrderStatus(OrderStatusValues.CANCELLED);
                 List<CartItem> cartItems = order.getOrderCartItems();
@@ -116,7 +117,6 @@ public class OrderService {
                         cartItem.getCartProduct().setStatus(ProductStatus.AVAILABLE);
                     }
                     orderRepository.save(order);
-                    return order;
                 }
             } else {
                 throw new OrderException("Order was already cancelled");
@@ -124,10 +124,10 @@ public class OrderService {
         } else {
             throw new OrderException("Invalid session");
         }
+        return order;
     }
 
-    public Order updateOrderByOrderId(OrderDto orderDto, Integer OrderId, String token)
-            throws OrderException, LoginException {
+    public Order updateOrderByOrderId(OrderDto orderDto, Integer OrderId, String token)throws OrderException, LoginException {
 
         Order existingOrder = orderRepository.findById(OrderId)
                 .orElseThrow(() -> new OrderException("No orders exist"));
